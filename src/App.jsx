@@ -411,6 +411,7 @@ function ContactSection() {
   const [formData, setFormData] = useState({ name: "", email: "", message: "" });
   const [error, setError] = useState("");
   const [sentMsg, setSentMsg] = useState("");
+  const [isSending, setIsSending] = useState(false); // New: to prevent multiple clicks
 
   const handleChange = (e) => setFormData({ ...formData, [e.target.name]: e.target.value });
 
@@ -423,13 +424,13 @@ function ContactSection() {
       return;
     }
     setError("");
+    setIsSending(true); // disable button during send
 
-    // EmailJS integration
     emailjs.send(
-      "service_4gw5ozw",      // Your Service ID
-      "template_dlk692o",     // Your Template ID
-      formData,               // Form data
-      "MiBcVlx2PtuyWZ0L9"    // Your Public Key
+      "service_4gw5ozw",
+      "template_dlk692o",
+      formData,
+      "MiBcVlx2PtuyWZ0L9"
     )
       .then((response) => {
         console.log("SUCCESS!", response.status, response.text);
@@ -440,6 +441,9 @@ function ContactSection() {
       .catch((err) => {
         console.log("FAILED...", err);
         setError("❌ Something went wrong. Please try again.");
+      })
+      .finally(() => {
+        setIsSending(false); // enable button again
       });
   };
 
@@ -496,9 +500,11 @@ function ContactSection() {
 
           <button
             type="submit"
-            className="mt-5 w-full rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-6 py-3 font-semibold text-white shadow-[0_10px_30px_rgba(0,200,255,.35)] hover:scale-[1.02] transition"
+            disabled={isSending}
+            className={`mt-5 w-full rounded-xl bg-gradient-to-r from-fuchsia-500 to-cyan-500 px-6 py-3 font-semibold text-white shadow-[0_10px_30px_rgba(0,200,255,.35)] transition
+              ${isSending ? "opacity-50 cursor-not-allowed" : "hover:scale-[1.02]"}`}
           >
-            Send Message
+            {isSending ? "Sending..." : "Send Message"}
           </button>
 
           {sentMsg && <p className="mt-3 text-center text-emerald-300 font-medium">{sentMsg}</p>}
