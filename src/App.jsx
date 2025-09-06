@@ -304,10 +304,16 @@ function HomeSection() {
 
 function AboutSection() {
   const timeline = [
-    { year: "2023–2027", title: "BSCS — Govt. University, Lahore", body: "Current CGPA 3.1 | Deepening CS & Advanced Calculus" },
-    { year: "2024", title: "Frontend Focus", body: "Responsive sites with Wix + HTML/CSS/JS" },
-    { year: "2025", title: "MERN Journey", body: "Building full‑stack apps, authentication & REST APIs" },
-  ];
+  { year: "2023–2027", title: "BSCS — Govt. University, Lahore", body: "Current CGPA 3.1 | Deepening CS & Advanced Calculus" },
+  { year: "2024", title: "Frontend Focus", body: "Responsive sites with Wix + HTML/CSS/JS" },
+  { year: "2025", title: "MERN Journey", body: "Building full-stack apps, authentication & REST APIs" },
+  { 
+    year: "July–August 2025", 
+    title: "QA Intern — eCare Solutions", 
+    body: "Contributed to QA by reporting & documenting bugs, testing APIs with Postman, creating bug reports, and exploring Angular (To-Do List, Weather App). Also researched Meta WhatsApp Business API integration limitations." 
+  },
+];
+
   return (
     <PageContainer id="about">
       <SectionTitle eyebrow="Who Am I" title="Crafting delightful, performant UIs" desc="I merge aesthetics with logic — animations that serve usability." />
